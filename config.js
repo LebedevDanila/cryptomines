@@ -8,7 +8,11 @@ const config = {
 	  		symbol: 'bnb',
 	  		explorer: 'https://bscscan.com/',
 		}
-	}
+	},
+	item: {
+		min_price: 0.02,
+		level: 3,
+	},
 }
 
 module.exports = config;
