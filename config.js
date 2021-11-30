@@ -12,6 +12,8 @@ const config = {
 	item: {
 		min_price: 0.02,
 		level: 3,
+		init_page: 2,
+		max_page: 4,
 	},
 }
 
