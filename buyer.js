@@ -33,7 +33,9 @@ const config = require('./config.js');
 		await page.goto('https://play.cryptomines.app/marketplace/spaceships', {
 			waitUntil: "networkidle0",
 		});
-		await page.type('.grid.grid-flow-col.gap-2.justify-start input[type="number"]', String(config.item.min_price));
+		if (config.item.min_price !== null) {
+			await page.type('.grid.grid-flow-col.gap-2.justify-start input[type="number"]', String(config.item.min_price));
+		}
 		await page.waitForSelector(`button.bg-gray-700.text-white:nth-child(${config.item.level})`);
 		await page.click(`button.bg-gray-700.text-white:nth-child(${config.item.level})`);
 
@@ -51,8 +53,8 @@ const config = require('./config.js');
 
 			await page.waitForSelector('.grid.grid-cols-1.gap-6');
 
-			await page.waitForSelector('.self-center.text-sm button.relative.mx-auto.flex.justify-center.undefined.bg-primary');
-			const elems = await page.$$('.self-center.text-sm button.relative.mx-auto.flex.justify-center.undefined.bg-primary');
+			await page.waitForSelector('.self-center.text-sm button.relative.mx-auto.flex.justify-center');
+			const elems = await page.$$('.self-center.text-sm button.relative.mx-auto.flex.justify-center');
 			
 			console.log(elems);
 			pagination++;

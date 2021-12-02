@@ -1,5 +1,5 @@
 const config = {
-	secret_phase: 'maple door mind roast barely parrot know input any fiction motion hidden',
+	secret_phase: 'maple door mind roast barely parrot know input any fiction motion hidden', // секретная фраза
 	networks: {
 		bsc: {
 			networkName: 'Binance Smart Chain Mainnet',
@@ -10,10 +10,10 @@ const config = {
 		}
 	},
 	item: {
-		min_price: 0.02,
-		level: 1,
-		init_page: 2,
-		max_page: 3,
+		min_price: null, // (null - отключить), (значение с плавающей точкой - базовая цена в eternal)
+		level: 1, // левел spaceships
+		init_page: 2, // начальная страница
+		max_page: 5, // последняя страница
 	},
 }
 
