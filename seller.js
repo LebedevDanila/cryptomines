@@ -1,7 +1,7 @@
 const axios = require('axios').default;
 
 async function getPrice(level, page = 3) {
-	const response = await axios.get(`https://api.cryptomines.app/api/spaceships?level=${level}&page=${page}&limit=8&sort=eternal&etfrom=0.02&etto=`);
+	const response = await axios.get(`https://api.cryptomines.app/api/spaceships?level=${level}&page=${page}&limit=8&sort=eternal`);
 	const items    = await response.data;
 	const data     = items.data;
 
@@ -9,6 +9,6 @@ async function getPrice(level, page = 3) {
 }
 
 (async () => {
-	const price = await getPrice(2);
+	const price = await getPrice(1);
 	console.log(price)
 })();
