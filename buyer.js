@@ -28,11 +28,11 @@ const config = require('./config.js');
 	// Назад на сайт
 	await page.bringToFront();
 
+	// парсинг маркета
+	await page.goto('https://play.cryptomines.app/marketplace/spaceships');
+
 	while (true) {
-		// парсинг маркета
-		await page.goto('https://play.cryptomines.app/marketplace/spaceships', {
-			waitUntil: "networkidle0",
-		});
+
 		if (config.item.min_price !== null) {
 			await page.type('.grid.grid-flow-col.gap-2.justify-start input[type="number"]', String(config.item.min_price));
 		}
@@ -53,12 +53,19 @@ const config = require('./config.js');
 
 			await page.waitForSelector('.grid.grid-cols-1.gap-6');
 
-			await page.waitForSelector('.self-center.text-sm button.relative.mx-auto.flex.justify-center');
+			try {
+				await page.waitForSelector('.self-center.text-sm button.relative.mx-auto.flex.justify-center');
+			} catch(e) {
+				console.log('Корабли для покупки не загрузились, идет перезагрузка...');
+				break;
+			}
+
 			const elems = await page.$$('.self-center.text-sm button.relative.mx-auto.flex.justify-center');
 			
 			console.log(elems);
 			pagination++;
 		}
+
 		await page.reload();
 	}
 })();
