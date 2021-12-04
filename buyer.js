@@ -29,7 +29,10 @@ const config = require('./config.js');
 	await page.bringToFront();
 
 	// парсинг маркета
-	await page.goto('https://play.cryptomines.app/marketplace/spaceships');
+	await page.goto('https://play.cryptomines.app/marketplace/spaceships', {
+	    waitUntil: 'networkidle0',
+	    timeout: 0
+	});
 
 	while (true) {
 
@@ -61,8 +64,18 @@ const config = require('./config.js');
 			}
 
 			const elems = await page.$$('.self-center.text-sm button.relative.mx-auto.flex.justify-center');
-			
-			console.log(elems);
+			if (elems.length) {
+				const index = Math.floor(Math.random() * elems.length);
+				const elem  = elems[index];
+
+				await elem.click();
+
+				await page.waitForSelector('.swal2-confirm.order-2.mr-3');
+				await page.click('.swal2-confirm.order-2.mr-3');
+
+				await metamask.confirmTransaction();
+			}
+
 			pagination++;
 		}
 
